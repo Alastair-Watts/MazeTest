@@ -12,11 +12,13 @@ public:
 	CIwFVec2 getLocation();
 	CIwFVec2 getVelocity();
 	uint64 updateLocation(uint64 currentTime, CIwFVec2 phoneAcceleration);
+	void paint();
 private:
 	CIwFVec2 location;
 	CIwFVec2 velocity;
 	CIwFVec2 screenSize;
 	uint64 previousTime;
 	float scale;
+	float radius;
 
 };

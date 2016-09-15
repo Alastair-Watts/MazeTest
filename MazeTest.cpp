@@ -14,7 +14,6 @@
 #include "Iw2DSceneGraph.h"
 #include "IwGx.h"
 #include "Ball.h"
-#include "StringUtil.h"
 
  // Scene root node
 CNode* g_SceneRoot = NULL;
@@ -53,16 +52,14 @@ int main()
 		Iw2DSurfaceClear(0xff00ff00);
 
 		uint32 newTime = s3eTimerGetMs();
-		totalTime += ball->updateLocation(s3eTimerGetMs(), CIwFVec2(s3eAccelerometerGetX(), s3eAccelerometerGetY()));
+		totalTime += ball->updateLocation(s3eTimerGetMs(), CIwFVec2(s3eAccelerometerGetX(), -s3eAccelerometerGetY()));
 
 		// Your rendering/app code goes here.
 
 		Iw2DSetColour(0xff0000ff);
 		Iw2DFillRect(CIwFVec2(0, 0), CIwFVec2(Iw2DGetSurfaceWidth(), Iw2DGetSurfaceHeight()));
 
-		CIwFVec2 sizeOfCircle = CIwFVec2(Iw2DGetSurfaceWidth() / 20, Iw2DGetSurfaceWidth() / 20);
-		Iw2DSetColour(0xffff0000);
-		Iw2DFillArc(ball->getLocation(), sizeOfCircle, 0, 2 * PI);
+		ball->paint();
 
 		g_SceneRoot->Render();
 

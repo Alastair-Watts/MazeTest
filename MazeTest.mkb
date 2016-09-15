@@ -2,7 +2,7 @@
 files
 {
     Ball.h
-	Ball.cpp
+    Ball.cpp
     MazeTest.cpp
 }
 
@@ -18,4 +18,11 @@ subprojects
 
 deployment
 {
+}
+
+#Hub deployment options, please do not add anything below this line
+subproject
+{
+    (.)
+    MazeTest_deployment
 }
