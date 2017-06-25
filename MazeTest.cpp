@@ -13,12 +13,16 @@
 #include "IwDebug.h"
 #include "Iw2DSceneGraph.h"
 #include "IwGx.h"
-#include "Ball.h"
+#include "FieldOfPlay.h"
 
  // Scene root node
 CNode* g_SceneRoot = NULL;
 
+FieldOfPlay* fieldOfPlay = NULL;
+
 Ball* ball = NULL;
+
+CIwArray<Wall>* walls = NULL;
 
 // Main entry point for the application
 int main()
@@ -35,6 +39,18 @@ int main()
 	CIwFVec2 centre = CIwFVec2(Iw2DGetSurfaceWidth() / 2, Iw2DGetSurfaceHeight() / 2);
 	ball = new Ball(centre, CIwFVec2(0, 0), CIwFVec2(Iw2DGetSurfaceWidth(), Iw2DGetSurfaceHeight()));
 
+	walls = new CIwArray<Wall>();
+
+	float width = Iw2DGetSurfaceHeight() / 20;
+	float gap = Iw2DGetSurfaceHeight() / 10;
+	Wall* wall1 = new Wall(CIwFVec2(0, centre.y - (width / 2)),
+		CIwFVec2(Iw2DGetSurfaceWidth() / 2 - gap/2, width));
+	walls->push_back(*wall1);
+	Wall* wall2 = new Wall(CIwFVec2(centre.x + gap / 2, centre.y - (width / 2)),
+		CIwFVec2(Iw2DGetSurfaceWidth() / 2 + gap/2, width));
+	walls->push_back(*wall2);
+
+	fieldOfPlay = new FieldOfPlay(*walls);
 
 	// Loop forever, until the user or the OS performs some action to quit the app
 	int i = 0;
@@ -53,6 +69,26 @@ int main()
 
 		uint32 newTime = s3eTimerGetMs();
 		totalTime += ball->updateLocation(s3eTimerGetMs(), CIwFVec2(s3eAccelerometerGetX(), -s3eAccelerometerGetY()));
+		float collisionPoint = fieldOfPlay->checkForCollisionTop(*ball);
+		if (collisionPoint != 0) {
+			ball->bounceDown(collisionPoint);
+		}
+		collisionPoint = fieldOfPlay->checkForCollisionBottom(*ball);
+		if (collisionPoint != 0) {
+			ball->bounceUp(collisionPoint);
+		}
+		collisionPoint = fieldOfPlay->checkForCollisionLeft(*ball);
+		if (collisionPoint != 0) {
+			ball->bounceRight(collisionPoint);
+		}
+		collisionPoint = fieldOfPlay->checkForCollisionRight(*ball);
+		if (collisionPoint != 0) {
+			ball->bounceLeft(collisionPoint);
+		}
+		CornerBounce cornerBounce = fieldOfPlay->checkForCollisionSides(*ball);
+		if (cornerBounce.angle != 5) {
+			ball->bounceAtAngle(cornerBounce);
+		}
 
 		// Your rendering/app code goes here.
 
@@ -60,6 +96,7 @@ int main()
 		Iw2DFillRect(CIwFVec2(0, 0), CIwFVec2(Iw2DGetSurfaceWidth(), Iw2DGetSurfaceHeight()));
 
 		ball->paint();
+		fieldOfPlay->paint();
 
 		g_SceneRoot->Render();
 
@@ -73,6 +110,10 @@ int main()
 	//Terminate modules being used
 	delete ball;
 	delete g_SceneRoot;
+	delete wall1;
+	delete wall2;
+	delete walls;
+	delete fieldOfPlay;
 
 	Iw2DTerminate();
 
