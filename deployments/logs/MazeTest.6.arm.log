@@ -1,0 +1,36 @@
+3
+4Making Deployment: C:/Users/Hannah/Documents/git/MazeTest/MazeTest.mkb
+3Running: C:\Marmalade\8.6\s3e/bin/s3e_deploy.bat C:/Users/Hannah/Documents/git/MazeTest/build_mazetest_vc14/deploy_config.py -n --targetdir ../deployments/MazeTest.6.arm --debug --os android --arch arm --gcc --debug-loader
+3
+2Marmalade Deployment Tool v1.3
+2Copyright (C) 2001-2012 Marmalade
+2calling C:\Marmalade\8.6\s3e\bin\iwlicense.exe --platcheck=android
+2deploying MazeTest [0.0.1] [arm-debug] for 'android' to folder: '..\deployments\MazeTest.6.arm\intermediate_files'
+2--> copying files ...
+2No splashscreens found
+2--> updating s3e binary: compression=lzma signing=0 config-embedding=0
+2[execute] s3e_mod.exe
+2--> performing custom deployment steps for: 'android'
+2Including Android extension: s3eAmazonAds_d
+5WARNING: Using default deployment icon(s)
+5WARNING: Android version code not set. Generating from version numbers 0.0.1 -> 1. It is advised to set these explicitly, starting at 1 and incrementing for each store release.
+2Adding external jar: c:/marmalade/8.6/platform_libs/android/amazon-ads-android-sdk/third_party/lib/amazon-ads-5.5.149.jar
+2Adding external jar: c:/marmalade/8.6/extensions/s3eamazonads/lib/android/s3eAmazonAds.jar
+2Adding application attributes:  android:debuggable="true"
+2Highest minimum version found in extensions is 4
+2Highest target version found in extensions is 17
+2Setting minimum SDK version to 9
+2Setting target SDK version to 17
+2Using Marmalade shipped Android SDK
+2[execute] aapt.exe
+5WARNING: Marmalade targets JDK version 7. Your version is 1.8.0_101.
+2[execute] javac.exe
+2[execute] dx.bat
+2[execute] keytool.exe
+2[execute] jarsigner.exe
+2[execute] zipalign.exe
+8SUCCESS (WITH WARNINGS): Package written to 'C:\Users\Hannah\Documents\git\MazeTest\deployments\MazeTest.6.arm' [took 16.71s]
+2Script Succeeded
+2Finished Running: Making Deployment
+2
+2

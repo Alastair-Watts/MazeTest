@@ -1,0 +1,15 @@
+3
+4Making Deployment: C:/Users/Hannah/Documents/git/MazeTest/MazeTest.mkb
+3Running: C:\Marmalade\8.4\s3e/bin/s3e_deploy.bat C:/Users/Hannah/Documents/git/MazeTest/build_mazetest_vc14/deploy_config.py -n --targetdir ../deployments/MazeTest.0.arm --debug --os android --arch arm --gcc --debug-loader
+3
+2Marmalade Deployment Tool v1.3
+2Copyright (C) 2001-2012 Marmalade
+2calling C:\Marmalade\8.4\s3e\bin\iwlicense.exe --platcheck=android
+2deploying MazeTest [0.0.1] [arm-debug] for 'android' to folder: '..\deployments\MazeTest.0.arm\intermediate_files'
+2--> copying files ...
+6ERROR: unable to locate application binary for this release: 'c:/Users/Hannah/Documents/git/MazeTest/build_mazetest_vc14/Debug_MazeTest_VC14_gcc_arm/MazeTest.s3e'
+2***ERROR***
+2Script failed with exit code: 1
+2Finished Running: Making Deployment
+2
+2

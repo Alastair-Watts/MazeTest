@@ -1,0 +1,6 @@
+# comments and whitespace stripped by deployment tool
+{}
+[s3e]
+SysAppVersion=0.0.1
+SysAppCaption="MazeTest"
+AndroidExtSo="libs3eAmazonAds_d.so"
